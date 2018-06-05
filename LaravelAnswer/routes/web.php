@@ -18,6 +18,10 @@ Route::get('/about', 'PageController@about')->name('about');
 Route::get('/contact', 'PageController@contact')->name('contact');
 Route::post('/contact', 'PageController@submitContact');
 
+Route::get('/voyager', function () {
+    return view('template-voyager');
+});
+
 Route::group(['prefix' => 'voyager-admin'], function () {
     Voyager::routes();
 });
