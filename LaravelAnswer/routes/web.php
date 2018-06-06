@@ -17,7 +17,8 @@ Route::get('/', function () {
 Route::get('/about', 'PageController@about')->name('about');
 Route::get('/contact', 'PageController@contact')->name('contact');
 Route::post('/contact', 'PageController@submitContact');
-
+Route::resource('questions', 'QuestionController');
+// Voyager sections
 Route::get('/voyager', function () {
     return view('template-voyager');
 });
