@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -24,6 +25,7 @@ class QuestionController extends Controller
     public function create()
     {
         //
+        return view('questions.create');
     }
 
     /**
@@ -35,6 +37,18 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'title' => 'required|max:191',
+            'description' => 'required'
+        ]);
+        $question = new Question();
+        $question->title = $request->title;
+        $question->description = $request->description;
+        if ($question->save()) {
+            return redirect()->route('questions.show', $question->id);
+        } else {
+            return redirect()->route('questions.create');
+        }
     }
 
     /**
