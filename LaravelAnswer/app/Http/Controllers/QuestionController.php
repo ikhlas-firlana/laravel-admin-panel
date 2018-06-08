@@ -15,6 +15,8 @@ class QuestionController extends Controller
     public function index()
     {
         //
+        $questions = Question::paginate(5);
+        return view('questions.index')->with('questions', $questions);
     }
 
     /**
@@ -60,6 +62,8 @@ class QuestionController extends Controller
     public function show($id)
     {
         //
+        $question = Question::findOrFail($id);
+        return view('questions.show')->with('question', $question);
     }
 
     /**
