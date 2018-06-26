@@ -2,29 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,6 +17,16 @@ class AnswersController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'content' => 'required|min:15',
+            'question_id' => 'required|integer'
+        ]);
+        $answer = new Answer();
+        $answer['question_id'] = $request['question_id'];
+        $answer['content'] = $request['content'];
+        $answer->save();
+        return view('questions.show')->with('question', $answer['question_id']);
+
     }
 
     /**

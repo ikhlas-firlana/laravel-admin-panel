@@ -12,4 +12,14 @@
 
         </div>
     </div>
+    <code>{{ $question->answer }}</code>
+    <div class="container">
+        <h3>Submit your answer :</h3>
+        <form method="post" action="{{ route('answers.store') }}">
+            {{ csrf_field() }}
+            <textarea class="form-control" name="content" rows="4"></textarea>
+            <input type="hidden" value="{{ $question->id }}" name="question_id" />
+            <button class="btn btn-primary">Submit Answer</button>
+        </form>
+    </div>
 @endsection
