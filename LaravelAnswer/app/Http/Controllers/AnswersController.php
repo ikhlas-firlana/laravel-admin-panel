@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Question;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller
@@ -24,8 +25,12 @@ class AnswersController extends Controller
         $answer = new Answer();
         $answer['question_id'] = $request['question_id'];
         $answer['content'] = $request['content'];
-        $answer->save();
-        return view('questions.show')->with('question', $answer['question_id']);
+
+        if ($answer->save()) {
+            return redirect()->route('questions.show', $request['question_id']);
+        } else {
+            return redirect()->route('questions.create');
+        }
 
     }
 

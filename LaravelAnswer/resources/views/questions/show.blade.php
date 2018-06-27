@@ -12,7 +12,17 @@
 
         </div>
     </div>
-    <code>{{ $question->answer }}</code>
+    <div class="container">
+    @foreach($question->answers as $answer)
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>
+                {{$answer['content']}}
+            </p>
+        </div>
+    </div>
+    @endforeach
+    </div>
     <div class="container">
         <h3>Submit your answer :</h3>
         <form method="post" action="{{ route('answers.store') }}">
