@@ -28,3 +28,7 @@ Route::get('/voyager', function () {
 Route::group(['prefix' => 'voyager-admin'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
